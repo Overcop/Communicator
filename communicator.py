@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.filedialog import *
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
-import os
 class msg:
     def __init__(self,message,path ,private=None,pripass=None,pub=None):
         self.message = message #message to decrypt or encrypt
