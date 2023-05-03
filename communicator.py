@@ -176,7 +176,7 @@ class msg:
                     print("are you sure? (y/n)")
                     rep = input("$> ")
                     if rep == "Y" or rep == "y":
-                        with open(self.mpath, "w") as f: f.write(ciphertext)
+                        with open(self.mpath, "wb") as f: f.write(ciphertext)
                         print("done!\n")
                         self.end = True
                         return
