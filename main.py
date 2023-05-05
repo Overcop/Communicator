@@ -16,14 +16,13 @@ print("  \ \ \L\ \/\ \L\ \/\ \/\ \/\ \/\ \/\ \/\ \ \ \_\ \/\ \/\ \ \ \/\ \__//\ 
 print("   \ \____/\ \____/\ \_\ \_\ \_\ \_\ \_\ \_\ \____/\ \_\ \_\ \_\ \____\ \__/.\_\\\ \__\ \____/\ \_\ ")
 print("    \/___/  \/___/  \/_/\/_/\/_/\/_/\/_/\/_/\/___/  \/_/\/_/\/_/\/____/\/__/\/_/ \/__/\/___/  \/_/ ")
 print("\n\n welcome to overcorp communicator!")
-while True:
+while True:#simple menu
     print("please choose an option:")
     print("1. Key generator")
     print("2. Com decoder/encoder")
     rsp=input("$> ")
     print("")
-    print(rsp)
     if int(rsp) == 1:
-        keygen.main()
+        keygen.main()#calls the keygen main class to start generation
     elif int(rsp) == 2:
-        cm.start()
+        cm.start()#start the communicator
