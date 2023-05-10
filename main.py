@@ -22,7 +22,7 @@ while True:#simple menu
     print("2. Com decoder/encoder")
     rsp=input("$> ")
     print("")
-    if int(rsp) == 1:
+    if rsp == "1":
         keygen.main()#calls the keygen main class to start generation
-    elif int(rsp) == 2:
+    elif rsp == "2":
         cm.start()#start the communicator

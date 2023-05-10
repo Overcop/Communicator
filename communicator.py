@@ -22,11 +22,11 @@ class msg: #create a message class
             print("3.go back")
             rep = input("$> ")
             print("")
-            if int(rep) == 1:
+            if rep == "1":
                 self.prtclencrypt()
-            elif int(rep) == 2:
+            elif rep == "2":
                 self.prtcldecrypt()
-            elif int(rep) == 3:
+            elif rep == "3":
                 return
     def getkey(self,type):
         #ask the user to select a key with a dialog window the arguments are:
@@ -60,7 +60,7 @@ class msg: #create a message class
                 print("3. abort")
                 rep = input("$> ")
                 print("")
-                if rep == "" or int(rep) == 1: #window to enter the password
+                if rep == "" or rep == "1": #window to enter the password
                     root = Tk()
                     root.title("Private key encryption password")
                     Label(root, text="enter private key password:").grid(row=0, column=0)
@@ -70,7 +70,6 @@ class msg: #create a message class
 
                     def getinput(): # action of the buton to get the input
                         self.pripass = bytes(ent.get(), 'utf-8')
-                        print(self.pripass)
                         root.quit() #note root.destroy() frezze the code.
                     b = Button(root, text="submit", command=lambda: getinput())
                     b.grid(row=0, column=2)
@@ -83,9 +82,9 @@ class msg: #create a message class
                         print("incorrect password\n")
                     else:
                         break
-                elif int(rep) == 2:
+                elif rep == "2":
                     return self.getkey("pri")#ask for another key
-                elif int(rep) == 3:
+                elif rep == "3":
                     self.abort = True #option 3 abort and return to the menu
                     return
         except ValueError: #cheks if the given file is valid
@@ -121,11 +120,11 @@ class msg: #create a message class
                     print("3.overwrite the file")
                     rep = input("$> ")
                     print("")
-                    if int(rep) == 1:
+                    if rep == "1":
                         print(plaintext,'\n') # dispay the message
                         self.end = True
                         return
-                    elif int(rep) == 2:
+                    elif rep == "2":
                         Tk().withdraw()
                         f = asksaveasfile(mode='w', defaultextension=".txt") #open a dialog window to ask where he wants to save the file
                         f.write(plaintext) #write in the file
@@ -133,7 +132,7 @@ class msg: #create a message class
                         print("done!\n")
                         self.end = True
                         return
-                    elif int(rep) == 3:
+                    elif rep == "3":
                         while True:
                             print("are you sure? (y/n)")#ask if the user is sure to overwrite the file
                             rep = input("$> ")
@@ -165,7 +164,7 @@ class msg: #create a message class
             print("2. overwrite")
             rep = input("$> ")
             print("")
-            if int(rep)== 1:
+            if rep== "1":
                 Tk().withdraw()
                 f=asksaveasfile(mode="wb",defaultextension=".txt")#ask where the user whant to save the file
                 f.write(ciphertext)
@@ -173,7 +172,7 @@ class msg: #create a message class
                 print("done!")
                 self.end = True
                 return
-            elif int(rep) == 2:
+            elif rep == "2":
                 while True:
                     print("are you sure? (y/n)")#ask if the user is sure to overwrite
                     rep = input("$> ")
