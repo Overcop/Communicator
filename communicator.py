@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.filedialog import *
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
+import scripttools as st
 class msg: #create a message class
     def __init__(self,message,path ,private=None,pripass=None,pub=None):
         self.message = message #message to decrypt or encrypt
@@ -16,17 +17,13 @@ class msg: #create a message class
             self.abort = False #reset the abort condition
             if self.end == True:#end communicator to return to the menu
                 return
-            print("what operation you want to execute?")
-            print("1.encrypt a message")
-            print("2.decrypt file")
-            print("3.go back")
-            rep = input("$> ")
+            rep = st.Ilist(["question"],["What operation you wish to execute?"], [["Encrypt file","Decrypt file","go back"]])
             print("")
-            if rep == "1":
+            if rep == 0:
                 self.prtclencrypt()
-            elif rep == "2":
+            elif rep == 1:
                 self.prtcldecrypt()
-            elif rep == "3":
+            elif rep == 2:
                 return
     def getkey(self,type):
         #ask the user to select a key with a dialog window the arguments are:
@@ -54,13 +51,9 @@ class msg: #create a message class
         try: self.prikey = serialization.load_pem_private_key(self.prikey,password=None) #cheks if the key have a password
         except TypeError: #the key have a password
             while True:
-                print("the selected key require a password")
-                print("1. enter the password")
-                print("2. select an other key")
-                print("3. abort")
-                rep = input("$> ")
+                rep = st.Ilist(["question"], ["The selected key require"], [["Enter the password", "Select an other key","Abort"]])
                 print("")
-                if rep == "" or rep == "1": #window to enter the password
+                if rep == 0: #window to enter the password
                     root = Tk()
                     root.title("Private key encryption password")
                     Label(root, text="enter private key password:").grid(row=0, column=0)
@@ -82,9 +75,9 @@ class msg: #create a message class
                         print("incorrect password\n")
                     else:
                         break
-                elif rep == "2":
+                elif rep == 1:
                     return self.getkey("pri")#ask for another key
-                elif rep == "3":
+                elif rep == 2:
                     self.abort = True #option 3 abort and return to the menu
                     return
         except ValueError: #cheks if the given file is valid
@@ -115,16 +108,13 @@ class msg: #create a message class
             print("what do you want to do with the decrypted message\n")
             while True:
                 while True: #menu to ask what the user want to do with the message
-                    print("1. display the message")
-                    print("2. save as txt")
-                    print("3.overwrite the file")
-                    rep = input("$> ")
+                    rep = st.Ilist(["question"], ["What do you want to do with the decrypted message?"],[["Display the message", "Save as txt", "Overwrite the file"]])
                     print("")
-                    if rep == "1":
+                    if rep == 0:
                         print(plaintext,'\n') # dispay the message
                         self.end = True
                         return
-                    elif rep == "2":
+                    elif rep == 1:
                         Tk().withdraw()
                         f = asksaveasfile(mode='w', defaultextension=".txt") #open a dialog window to ask where he wants to save the file
                         f.write(plaintext) #write in the file
@@ -132,16 +122,15 @@ class msg: #create a message class
                         print("done!\n")
                         self.end = True
                         return
-                    elif rep == "3":
+                    elif rep == 2:
                         while True:
-                            print("are you sure? (y/n)")#ask if the user is sure to overwrite the file
-                            rep = input("$> ")
-                            if rep == "y" or rep == "Y":
+                            rep = st.Ilist(["question"], ["Are you sure?"],[["Yes", "No"]])
+                            if rep == 0:
                                 with open(self.mpath, "w") as f: f.write(plaintext) #overwite the file
                                 print("done!\n")
                                 self.end = True
                                 return
-                            elif rep == "n" or rep == "N":
+                            elif rep == 1:
                                 break
     def prtclencrypt(self): #protocol for decryption
         print("to encrypt a message please select a public key")
@@ -159,12 +148,9 @@ class msg: #create a message class
         )
         print("encryption success!")
         while True:
-            print("what do you want to do?")
-            print("1. save as")
-            print("2. overwrite")
-            rep = input("$> ")
+            rep = st.Ilist(["question"], ["what do you want to do?"],[["Save as", "Overwrite"]])
             print("")
-            if rep== "1":
+            if rep == 0:
                 Tk().withdraw()
                 f=asksaveasfile(mode="wb",defaultextension=".txt")#ask where the user whant to save the file
                 f.write(ciphertext)
@@ -172,16 +158,15 @@ class msg: #create a message class
                 print("done!")
                 self.end = True
                 return
-            elif rep == "2":
+            elif rep == 1:
                 while True:
-                    print("are you sure? (y/n)")#ask if the user is sure to overwrite
-                    rep = input("$> ")
-                    if rep == "Y" or rep == "y":
+                    rep = st.Ilist(["question"], ["Are you sure?"],[["Yes", "No"]])
+                    if rep == 0:
                         with open(self.mpath, "wb") as f: f.write(ciphertext)#ovewrite the file
                         print("done!\n")
                         self.end = True
                         return
-                    elif rep == "N" or rep == "n":
+                    elif rep == 1:
                         break
 def start():#starting function
     print("please select a file that you want to encrypt/decrypt")

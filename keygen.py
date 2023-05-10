@@ -3,6 +3,7 @@ from cryptography.hazmat.primitives import serialization
 from tkinter import *
 from tkinter.filedialog import *
 import tkinter.messagebox
+import  scripttools as st
 def main():
     print("before generating keys please select a dir to do so")
     print("ready to select press enter")
@@ -13,9 +14,8 @@ def main():
             key_size=2048,
         )
     while True:
-        print("do you want to put a password on the private key? (y/n)")
-        rep = input("$> ")
-        if rep == "Y" or rep == "y":
+        rep = st.Ilist(["question"], ["Do you want to put a password on the private key?"], [["Yes", "No"]])
+        if rep == 0:
             root = Tk()#create a window to enter the password
             root.title("Set private key encryption password")
             Label(root, text="enter private key password:").grid(row=0, column=0)
@@ -51,8 +51,9 @@ def main():
             # create the file and write them
             with open(dir+"/public.pem", "wb") as f: f.write(serial_pub)
             with open(dir+"/private.pem", "wb") as f: f.write(serial_private)
+            print("done!\n")
             return
-        elif rep == "n" or rep == "N":
+        elif rep == 1:
             public_key = private_key.public_key()#get the public key
             serial_private = private_key.private_bytes(#put the private key into bytes without a password
                 encoding=serialization.Encoding.PEM,
@@ -68,4 +69,5 @@ def main():
                 f.write(serial_pub)
             with open(dir + "/private.pem", "wb") as f:
                 f.write(serial_private)
+            print("done!\n")
             return
