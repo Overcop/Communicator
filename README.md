@@ -1,3 +1,8 @@
+# main-legacy
+This is an achive before implementation of python inquirer.
+python inquirer is sometime poorly interpreated by some interpreter. this is why this branch exsits.
+THIS BRANCH SOULD BE NEVER MERGED WITH OR TO ANOTHER BRANCH.
+this branch may NOT be updated.
 # Communicator
 A simple tool to encrypt/decrypt message with RSA keys. can also generate RSA keys
 # App code
